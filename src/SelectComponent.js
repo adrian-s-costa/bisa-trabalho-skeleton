@@ -6,7 +6,7 @@ export default function SelectComponent({data, isGender}){
       {isGender ? (
         //radio buttons
         data.map((item) => (
-          <div key={item.value}>
+          <div key={item.value} style={{ display: 'inline-block'}}>
             <input id={item.label} type="radio" />
             <label htmlFor={item.label}>{item.label}</label>
           </div>
