@@ -2,13 +2,22 @@ import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import Select from 'react-select';
 import SelectComponent from './SelectComponent';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
 
 function Formulario() {
   const { handleSubmit, register, control, errors } = useForm();
 
+  const navigate = useNavigate()
+
   const onSubmit = (data) => {
     setUsuario({...usuario, newsletter: newsletter})
     setVisible(true)
+    axios.post('http://localhost:3001/form/save', usuario)
+    .then((response) => {
+      navigate('/results');
+    })
   };
 
   const estadosBrasileiros = [
@@ -271,9 +280,9 @@ function Formulario() {
 
         
 
-      <button type="submit" onClick={() => { console.log(usuario)}}>Enviar</button>
+      <button type="submit">Enviar</button>
       </form>
-      {visible ? <h1>{usuario.nomeCompleto}</h1> : null }
+      {/* {visible ? <h1>{usuario.nomeCompleto}</h1> : null } */}
     </>
   );
 }
